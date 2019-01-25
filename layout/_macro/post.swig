@@ -61,6 +61,11 @@
         {% endif %}
 
         <div class="post-meta">
+	 {% if post.top %}
+            <i class="fa fa-thumb-tack"></i>
+            <font color=7D26CD>置顶</font>
+            <span class="post-meta-divider">|</span>
+          {% endif %}
           <span class="post-time">
             {% if theme.post_meta.created_at %}
               <span class="post-meta-item-icon">
@@ -233,7 +238,7 @@
                   <span class="post-meta-item-text">{{ __('post.wordcount') }}&#58;</span>
                 {% endif %}
                 <span title="{{ __('post.wordcount') }}">
-                  {{ wordcount(post.content) }}
+                  {{ wordcount(post.content) }} 字
                 </span>
               {% endif %}
 
@@ -249,7 +254,7 @@
                   <span class="post-meta-item-text">{{ __('post.min2read') }} &asymp;</span>
                 {% endif %}
                 <span title="{{ __('post.min2read') }}">
-                  {{ min2read(post.content) }}
+                  {{ min2read(post.content) }} 分钟
                 </span>
               {% endif %}
             </div>
@@ -356,7 +361,7 @@
       {% if post.tags and post.tags.length and not is_index %}
         <div class="post-tags">
           {% for tag in post.tags %}
-            <a href="{{ url_for(tag.path) }}" rel="tag"># {{ tag.name }}</a>
+            <a href="{{ url_for(tag.path) }}" rel="tag"><i class="fa fa-tag"></i> {{ tag.name }}</a>
           {% endfor %}
         </div>
       {% endif %}
@@ -383,6 +388,11 @@
                 <div class="fb-like" data-layout="button_count" data-share="true"></div>
               </div>
             {% endif %}
+{% if theme.leancloud_visitors.enable %}
+		  	 <span id="{{ url_for(post.path) }}"class="leancloud_visitors"  data-flag-title="{{ post.title }}">
+            {{__('post.visitors')}}
+            </span>
+		  {% endif %}
           </div>
         {% endif %}
 
